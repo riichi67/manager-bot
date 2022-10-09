@@ -11,8 +11,6 @@ intents.members = True
 prefix = Config.prefix
 token = Config.bot_token
 
-
-
 #Префикс
 client = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
 
@@ -44,7 +42,6 @@ async def tsay(ctx, *, message=None):
         await ctx.message.delete()
         await ctx.send(embed=discord.Embed(description= f"{message}", 
                                            color=discord.Colour.random()))
-
 
 @client.command(aliases=["s"])
 async def say(ctx, *, message=None):
@@ -127,90 +124,6 @@ async def mute(ctx, member: discord.Member, time: int, d, *, reason=None):
                 mutetimef.truncate()
                 mutetimef.write(mutetime)
         await asyncio.sleep(1)
-
-# Верификация
-
-
-@client.command()
-async def setup(ctx):
-    try:
-        message_id = int(client.message_id)
-    except ValueError:
-        return await ctx.send("Invalid Message ID passed")
-    except Exception as e:
-        raise e
-
-    try:
-        channel_id = int(client.channel_id)
-    except ValueError:
-        return await ctx.send("Invalid Channel ID passed")
-    except Exception as e:
-        raise e
-    
-    channel = client.get_channel(channel_id)
-    
-    if channel is None:
-        return await ctx.send("Channel Not Found")
-    
-    message = await channel.fetch_message(message_id)
-    
-    if message is None:
-        return await ctx.send("Message Not Found")
-    
-    await message.add_reaction("✅")
-    await ctx.send("Setup Successful")
-    
-    client.setup = True
-
-@client.event
-async def on_raw_reaction_add(payload):
-    if client.setup != True:
-        return print(f"Bot is not setuped\nType {prefix}setup to setup the client")
-    
-    if payload.message_id == int(client.message_id):
-        if str(payload.emoji) == "✅":
-            guild = client.get_guild(payload.guild_id)
-            if guild is None:
-                return print("Guild Not Found\nTerminating Process")
-            try:
-                role = discord.utils.get(guild.roles, name=client.role_name)
-            except:
-                return print("Role Not Found\nTerminating Process")
-            
-            member = guild.get_member(payload.user_id)
-            
-            if member is None:
-                return
-            try:
-                await member.add_roles(role)
-            except Exception as e:
-                raise e
-
-@client.event
-async def on_raw_reaction_remove(payload):
-    if client.setup != True:
-        return print(f"Bot is not setuped\nType {prefix}setup to setup the client")
-    
-    if payload.message_id == int(client.message_id):
-        if str(payload.emoji) == "✅":
-            guild = client.get_guild(payload.guild_id)
-            if guild is None:
-                return print("Guild Not Found\nTerminating Process")
-            try:
-                role = discord.utils.get(guild.roles, name=client.role_name)
-            except:
-                return print("Role Not Found\nTerminating Process")
-            
-            member = guild.get_member(payload.user_id)
-            
-            if member is None:
-                return
-            try:
-                await member.remove_roles(role)
-            except Exception as e:
-                raise e
-
-
 
 keep_alive()
 TOKEN = os.environ.get("DISCORD_BOT_SECRET")
