@@ -1,23 +1,18 @@
 import discord
-import random
 import os
 import asyncio
 from discord.ext import commands
 from webserver import keep_alive
-from config import Config
 intents = discord.Intents.default()
 intents.members = True
 
-prefix = Config.prefix
-token = Config.bot_token
+prefix = os.environ.get("prefix")
+token = os.environ.get("token")
 
 #Префикс
 client = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
 
 client.setup = False
-client.role_name = Config.role_name
-client.message_id = Config.message_id
-client.channel_id = Config.channel_id
 
 # Статусы
 @client.event
@@ -29,7 +24,7 @@ async def on_ready():
         await asyncio.sleep(10)
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="ебанатов с сыркафе"))
         await asyncio.sleep(10)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name="пиздец" , url="my_twitch_url"))
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name="пиздец" , url="https://discord.gg/46vYGzeprQ"))
         await asyncio.sleep(20)
 
 # Пинги
@@ -126,5 +121,4 @@ async def mute(ctx, member: discord.Member, time: int, d, *, reason=None):
         await asyncio.sleep(1)
 
 keep_alive()
-TOKEN = os.environ.get("DISCORD_BOT_SECRET")
-client.run(TOKEN)
+client.run(token)

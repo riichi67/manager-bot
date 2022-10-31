@@ -10,6 +10,7 @@ numpy = "^1.22.2"
 replit = "^3.2.4"
 "discord.py" = "^1.7.3"
 Flask = "^2.2.2"
+config = "^0.5.1"
 
 [tool.poetry.dev-dependencies]
 
