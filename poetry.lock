@@ -94,19 +94,32 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "discord"
+version = "2.0.0"
+description = "A mirror package for discord.py. Please install that instead."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+"discord.py" = ">=2.0.0"
+
+[[package]]
 name = "discord.py"
-version = "1.7.3"
+version = "2.0.1"
 description = "A Python wrapper for the Discord API"
 category = "main"
 optional = false
-python-versions = ">=3.5.3"
+python-versions = ">=3.8.0"
 
 [package.dependencies]
-aiohttp = ">=3.6.0,<3.8.0"
+aiohttp = ">=3.7.4,<4"
 
 [package.extras]
-docs = ["sphinx (==3.0.3)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport"]
-voice = ["PyNaCl (>=1.3.0,<1.5)"]
+docs = ["sphinx (==4.4.0)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport", "typing-extensions (>=4.3,<5)"]
+speed = ["orjson (>=3.5.4)", "aiodns (>=1.1)", "brotli", "cchardet (==2.1.7)"]
+test = ["coverage", "pytest", "pytest-asyncio", "pytest-cov", "pytest-mock", "typing-extensions (>=4.3,<5)"]
+voice = ["PyNaCl (>=1.3.0,<1.6)"]
 
 [[package]]
 name = "flask"
@@ -196,6 +209,22 @@ description = "NumPy is the fundamental package for array computing with Python.
 category = "main"
 optional = false
 python-versions = ">=3.8"
+
+[[package]]
+name = "py-cord"
+version = "2.2.2"
+description = "A Python wrapper for the Discord API"
+category = "main"
+optional = false
+python-versions = ">=3.8.0"
+
+[package.dependencies]
+aiohttp = ">=3.6.0,<3.9.0"
+
+[package.extras]
+docs = ["sphinx (==4.5.0)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport", "myst-parser"]
+speed = ["orjson (>=3.5.4)", "aiodns (>=1.1)", "brotlipy", "cchardet"]
+voice = ["PyNaCl (>=1.3.0,<1.6)"]
 
 [[package]]
 name = "replit"
@@ -292,7 +321,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "5015f1d665d44cf827f63c98bc3aa472dd13fcbaca999c6ed82ec27a2136040c"
+content-hash = "3fc793d7ae61820568ffb0f9665e4bc6025f48b86c86c6e79739063bbab04b30"
 
 [metadata.files]
 aiohttp = []
@@ -304,6 +333,7 @@ charset-normalizer = []
 click = []
 colorama = []
 config = []
+discord = []
 "discord.py" = []
 flask = []
 idna = []
@@ -313,6 +343,7 @@ jinja2 = []
 markupsafe = []
 multidict = []
 numpy = []
+py-cord = []
 replit = []
 requests = []
 typing-extensions = []
