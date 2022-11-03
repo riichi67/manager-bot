@@ -8,7 +8,7 @@ token = os.environ.get("token")
 bot = discord.Bot()
 
 
-@bot.event
+@bot.event  # Запуск (инфо в консоли)
 async def on_ready():
     print(f'{bot.user.name} запустился и готов к работе!')
 
@@ -55,14 +55,11 @@ async def permserror(ctx, error):
             'Прости, но у тебя нет прав для выполнения данной команды...')
 
 
-# @bot.event
-# async def on_ready():
-#    print(f'Client ready as {bot.user}')
-
-
-@bot.slash_command(description="Отправляет пинг бота.")
+@bot.slash_command(description="Отправляет пинг бота.")  # Пинг
 async def ping(ctx):
-    await ctx.respond(f"Понг! Пинг бота - {bot.latency} секунд.")
+    await ctx.respond(
+        f"Понг! Задержка между получением запроса и выполнением команды - {bot.latency} секунд."
+    )
 
 
 keep_alive()
