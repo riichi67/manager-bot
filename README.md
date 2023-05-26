@@ -1,6 +1,7 @@
 # Менеджер – бот для дискорда
 
 [![Run on Repl.it](https://replit.com/badge/github/riichimaru/manager-bot)](https://replit.com/new/github/riichimaru/manager-bot)
+
 Приветствую! 
 Это исходный код бота "Менеджер" эксклюзивно для Сырного Кафе.
 Со временем, благодаря интеграции с repl.it, информация здесь будет обновляться.
