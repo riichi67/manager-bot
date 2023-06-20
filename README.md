@@ -1,5 +1,7 @@
 # Менеджер – бот для дискорда
 
+В данный момент ведётся реворк на работу бота без Replit и перевод на английский. Спасибо за понимание!
+
 [![Run on Repl.it](https://replit.com/badge/github/riichimaru/manager-bot)](https://replit.com/new/github/riichimaru/manager-bot)
 
 Приветствую! 
