@@ -57,34 +57,31 @@ async def permserror(ctx, error):
 
 
 class MyView(discord.ui.View): # UI-класс пинга
-    @discord.ui.button(label="Получить задержку бота!", style=discord.ButtonStyle.primary, emoji="🏓")
+    @discord.ui.button(label="Поехали!", style=discord.ButtonStyle.primary, emoji="🏓")
     async def button_callback(self, button, interaction):
-        await interaction.response.send_message(f"Задержка между получением запроса и выполнением команды - {bot.latency} секунд!") 
+        await interaction.response.send_message(f"Пинг бота - {round(bot.latency*1000, 1)} миллисекунд!")
 
-@bot.bridge_command(description="Отправляет пинг бота.") # Пинг
-async def ping(ctx):
-    await ctx.respond("Нажми на кнопку для получения пинга бота!", view=MyView())
-
-@bot.bridge_command(description="Отправляет сумму двух чисел.")
-async def add(ctx, a: int, b: int):
-  await ctx.respond(a + b)
-
-@bot.bridge_command(description="Отправляет разность двух чисел.")
-async def subtract(ctx, a: int, b: int):
-  await ctx.respond(a - b)
-
-@bot.bridge_command(description="Отправляет произведение двух чисел.")
-async def multiply(ctx, a: int, b: int):
-  await ctx.respond(a + b)
-
-@bot.bridge_command(description="Отправляет частное двух чисел.")
-async def divide(ctx, a: int, b: int):
-  await ctx.respond(a / b)
+@bot.slash_command(name="attach", description='Тестовая команда для проверки прикрепления файла')
+@option(
+    "attachment",
+    discord.Attachment,
+    description="файл для отправки",
+    required=True,
+)
+async def say(
+    ctx: discord.ApplicationContext,
+    attachment: discord.Attachment,
+):
+    if attachment:
+        file = await attachment.to_file()
+        await ctx.respond("Вот твой файл!", file=file)
+    else:
+        await ctx.respond(":cry:")
 
 @bot.event # Отсутствие команды
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("Команда набрана неправильно, или не существует. Проверьте в меню слэш-команд!")
+        await ctx.send("Команда набрана неправильно, или не существует. Проверь в меню слэш-команд!")
 
 keep_alive()
 bot.run(token)
